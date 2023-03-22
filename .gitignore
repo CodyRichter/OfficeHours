@@ -1,0 +1,7 @@
+.idea/*
+.vscode/*
+.history/*
+*.vsix
+.ionide
+*.code-workspace
+*.DS_Store
