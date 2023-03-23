@@ -9,6 +9,7 @@ import { FiLogIn, FiLogOut, FiUserPlus } from "react-icons/fi";
 export default function WebsiteHeader({
     token,
     updateAndSaveToken,
+    userProfile,
 }) {
 
     const navigate = useNavigate();
@@ -47,7 +48,7 @@ export default function WebsiteHeader({
                             onClick={() => updateAndSaveToken(null)}
                             leftIcon={<FiLogOut />}
                         >
-                            Logout
+                            {userProfile?.instructor ? "Log Out" : "Leave Session"}
                         </Button>
                     )}
                 </Group>

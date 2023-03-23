@@ -56,20 +56,29 @@ export default function LoginDialog({
             return;
         }
 
-        Network.login(email, password)
-            .then((token) => {
-                updateAndSaveToken(token);
-                notifications.show({
-                    title: "Login Successful",
-                    message: "You have successfully logged in as an instructor.",
-                    color: "teal",
-                    icon: <FiCheckCircle />,
-                });
-                closeModal();
-            })
-            .catch((e) => {
-                setLoginError(e.message);
-            });
+        // Network.login(email, password)
+        //     .then((token) => {
+        //         updateAndSaveToken(token);
+        //         notifications.show({
+        //             title: "Login Successful",
+        //             message: "You have successfully logged in as an instructor.",
+        //             color: "teal",
+        //             icon: <FiCheckCircle />,
+        //         });
+        //         closeModal();
+        //     })
+        //     .catch((e) => {
+        //         setLoginError(e.message);
+        //     });
+
+        updateAndSaveToken('instructor-token');
+        notifications.show({
+            title: "Login Successful",
+            message: "You have successfully logged in as an instructor.",
+            color: "teal",
+            icon: <FiCheckCircle />,
+        });
+        closeModal();
     }
 
     const loginOnEnterPress = (event) => {

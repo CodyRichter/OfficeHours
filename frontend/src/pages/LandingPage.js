@@ -6,7 +6,7 @@ import { notifications } from '@mantine/notifications';
 import { FiCheckCircle } from "react-icons/fi";
 
 
-export default function LandingPage({ token, userProfile }) {
+export default function LandingPage({ updateAndSaveToken }) {
 
     const [roomCode, setRoomCode] = useState("");
     const [roomCodeError, setRoomCodeError] = useState('');
@@ -48,7 +48,7 @@ export default function LandingPage({ token, userProfile }) {
             autoClose: 5000,
         });
 
-        navigate(`/room/${roomCode}`);
+        updateAndSaveToken('student-roomcode-token');
     };
 
 
