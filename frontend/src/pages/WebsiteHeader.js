@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import LoginDialog from "./auth/LoginDialog";
+import LoginDialog from "../components/auth/LoginDialog";
 import { isEmpty } from "lodash";
-import { SignupDialog } from "./auth/SignupDialog";
+import { SignupDialog } from "../components/auth/SignupDialog";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { Button, Center, Group, Header, rem, Text } from "@mantine/core";
 import { FiLogIn, FiLogOut, FiUserPlus } from "react-icons/fi";
+import { IoSchoolSharp } from "react-icons/io5";
 
 export default function WebsiteHeader({
     token,
@@ -22,22 +23,26 @@ export default function WebsiteHeader({
                         style={{ cursor: "pointer" }}
                         onClick={() => navigate("/")}
                         size="xl"
-                        weight={700}
+                        weight={600}
                         color="white"
                     >
-                        Office Hours
+                        <IoSchoolSharp />
+                        &nbsp;
+                        AccOH
                     </Text>
 
                     {isEmpty(token) ? (
                         <Group>
                             <Button
                                 onClick={() => navigate("/register")}
+                                variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }}
                                 leftIcon={<FiUserPlus />}
                             >
                                 Instructor Sign Up
                             </Button>
                             <Button
                                 onClick={() => navigate("/login")}
+                                variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }}
                                 leftIcon={<FiLogIn />}
                             >
                                 Instructor Sign In
@@ -46,6 +51,7 @@ export default function WebsiteHeader({
                     ) : (
                         <Button
                             onClick={() => updateAndSaveToken(null)}
+                            variant="gradient" gradient={{ from: 'orange', to: 'red' }}
                             leftIcon={<FiLogOut />}
                         >
                             {userProfile?.instructor ? "Log Out" : "Leave Session"}

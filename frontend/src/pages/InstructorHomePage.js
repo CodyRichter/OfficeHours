@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import { Button, Center, Container, Divider, Grid, Group, Paper, Text } from "@mantine/core";
 import { BsFillCircleFill } from "react-icons/bs";
+import { notifications } from '@mantine/notifications';
+import { useNavigate } from "react-router-dom";
+import { FiCheckCircle } from "react-icons/fi";
+
 
 export default function InstructorHomePage({ token, userProfile }) {
+
+    const navigate = useNavigate();
 
     const [officeHourSessions, setOfficeHourSessions] = useState([
         {
@@ -12,6 +18,7 @@ export default function InstructorHomePage({ token, userProfile }) {
             start_time: "2021-04-01T12:00:00.000Z",
             end_time: "2021-04-01T13:00:00.000Z",
             active: true,
+            room_code: "123456",
         },
         {
             id: 2,
@@ -20,6 +27,7 @@ export default function InstructorHomePage({ token, userProfile }) {
             start_time: "2021-04-01T12:00:00.000Z",
             end_time: "2021-04-01T13:00:00.000Z",
             active: true,
+            room_code: "123456",
         },
         {
             id: 3,
@@ -28,6 +36,7 @@ export default function InstructorHomePage({ token, userProfile }) {
             start_time: "2021-04-01T12:00:00.000Z",
             end_time: "2021-04-01T13:00:00.000Z",
             active: false,
+            room_code: "123456",
         },
         {
             id: 4,
@@ -36,6 +45,7 @@ export default function InstructorHomePage({ token, userProfile }) {
             start_time: "2021-04-01T12:00:00.000Z",
             end_time: "2021-04-01T13:00:00.000Z",
             active: false,
+            room_code: "123456",
         },
         {
             id: 5,
@@ -44,6 +54,7 @@ export default function InstructorHomePage({ token, userProfile }) {
             start_time: "2021-04-01T12:00:00.000Z",
             end_time: "2021-04-01T13:00:00.000Z",
             active: false,
+            room_code: "123456",
         },
         {
             id: 6,
@@ -52,11 +63,22 @@ export default function InstructorHomePage({ token, userProfile }) {
             start_time: "2021-04-01T12:00:00.000Z",
             end_time: "2021-04-01T13:00:00.000Z",
             active: false,
+            room_code: "123456",
         }
     ]);
 
     const [activeSessions, setActiveSessions] = useState(2);
     const [inactiveSessions, setInactiveSessions] = useState(4);
+
+    function joinSession(roomCode) {
+        notifications.show({
+            title: 'Joined Office Hour Session',
+            message: `Successfully joined ${roomCode} as an instructor.`,
+            color: 'green',
+            icon: <FiCheckCircle color="green" />,
+        });
+        navigate(`/instruct/${roomCode}`);
+    };
 
     return (
         <>
@@ -101,7 +123,11 @@ export default function InstructorHomePage({ token, userProfile }) {
                                                 <Divider className='mb-2' />
 
                                                 <Group position="right">
-                                                    <Button variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }}>
+                                                    <Button
+                                                        variant="gradient"
+                                                        gradient={{ from: 'indigo', to: 'cyan' }}
+                                                        onClick={() => joinSession(session.room_code)}
+                                                    >
                                                         Join Session
                                                     </Button>
                                                 </Group>
@@ -119,7 +145,7 @@ export default function InstructorHomePage({ token, userProfile }) {
 
                     {inactiveSessions > 0 && <>
                         <Text size="xl" weight={600} className='mb-4' align='left'>
-                            Inactive Sessions
+                            Finished Sessions
                         </Text>
 
                         {/* Inactive Sessions */}

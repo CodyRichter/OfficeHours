@@ -48,13 +48,17 @@ export default function ErrorPage() {
     return (
         <Container className={classes.root}>
             <div className={classes.label}>Error</div>
-            <Title className={classes.title}>You have found a secret place.</Title>
+            <Title className={classes.title}>You might have just discovered a secret place, or simply typed in the address wrong.</Title>
             <Text color="dimmed" size="lg" align="center" className={classes.description}>
-                Unfortunately, this is only an error page. You may have mistyped the address, or the page has
-                been moved to another URL.
+                For whatever reason, we can't seem to find the page that you're looking for. We apologize for the inconvenience
+                and hope that you can find what you're looking for soon!
             </Text>
             <Group position="center">
-                <Button variant="subtle" size="md" onClick={() => window.history.back()}>
+                <Button
+                    variant="subtle"
+                    size="lg"
+                    onClick={() => window.history.back()
+                    }>
                     Take Me Back!
                 </Button>
             </Group>
