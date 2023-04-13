@@ -1,10 +1,12 @@
-import { Button, Center, Navbar, Paper, Title, Text } from "@mantine/core";
+import { Button, Center, Navbar, Paper, Title, Text, Table, Stack } from "@mantine/core";
 import { isEmpty } from "lodash";
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { IoExit } from "react-icons/io5";
 import { notifications } from '@mantine/notifications';
 import { RiShutDownLine } from "react-icons/ri";
+import { TbHandStop } from "react-icons/tb";
+import { RxCross2 } from "react-icons/rx";
 
 export default function InstructorSessionSidebar({ token, userProfile }) {
 
@@ -39,6 +41,7 @@ export default function InstructorSessionSidebar({ token, userProfile }) {
 
     return (
         <Navbar width={{ base: '15vw' }} height='100vh' p="xs" >
+
             <Navbar.Section>
                 <Paper className="mb-3 mt-1" withBorder>
                     <Center>
@@ -57,32 +60,67 @@ export default function InstructorSessionSidebar({ token, userProfile }) {
                     </Center>
                 </Paper>
             </Navbar.Section>
+            <Navbar.Section>
+                <Text size="xl" weight={400}>
+                    Students in Session
+                </Text>
 
-            <Navbar.Section className="mt-3">
+                <Paper className="mt-2" withBorder>
+                    <Table>
+                        <th>
+                        </th>
+                        <th></th>
+                        <th></th>
+                        <tbody>
+                            <tr>
+                                <td><TbHandStop size={20} /></td>
+                                <td>John Doe</td>
+                                <td><Button variant="subtle" color="blue">Visit</Button></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Jane Doe</td>
+                                <td><Button variant="subtle" color="blue">Visit</Button></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Timmy Smith</td>
+                                <td><Button variant="subtle" color="blue">Visit</Button></td>
+                            </tr>
+                            <tr>
+                                <td><TbHandStop size={20} /></td>
+                                <td>Jimmy McHill</td>
+                                <td><Button variant="subtle" color="blue">Visit</Button></td>
+                            </tr>
+                        </tbody>
+                    </Table>
+                </Paper>
+            </Navbar.Section>
+
+            <Navbar.Section>
                 <Button
                     fullWidth
-                    variant="gradient"
-                    gradient={{ from: 'orange', to: 'red' }}
+                    variant="outline"
+                    color="orange"
                     leftIcon={<IoExit size={20} />}
                     onClick={leaveSession}
+                    className="mb-3 mt-5"
                 >
                     Leave Session
                 </Button>
-            </Navbar.Section>
-
-            <Navbar.Section className="mt-3">
                 <Button
                     fullWidth
-                    variant="gradient"
-                    gradient={{ from: 'red', to: 'darkred' }}
-                    leftIcon={<IoExit size={20} />}
+                    variant="outline"
+                    color="red"
+                    leftIcon={<RxCross2 size={20} />}
                     onClick={endSession}
                 >
                     End Session
                 </Button>
             </Navbar.Section>
 
-        </Navbar>
+
+        </Navbar >
     );
 
 

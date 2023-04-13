@@ -4,6 +4,8 @@ import { BsFillCircleFill } from "react-icons/bs";
 import { notifications } from '@mantine/notifications';
 import { useNavigate } from "react-router-dom";
 import { FiCheckCircle } from "react-icons/fi";
+import StartSessionDialog from "../components/dialogs/StartSessionDialog";
+import ShareSessionDialog from "../components/dialogs/ShareSessionDialog";
 
 
 export default function InstructorHomePage({ token, userProfile }) {
@@ -70,6 +72,11 @@ export default function InstructorHomePage({ token, userProfile }) {
     const [activeSessions, setActiveSessions] = useState(2);
     const [inactiveSessions, setInactiveSessions] = useState(4);
 
+    const [shareSessionDialogProps, setShareSessionDialogProps] = useState({
+        open: false,
+        sessionId: null,
+    });
+
     function joinSession(roomCode) {
         notifications.show({
             title: 'Joined Office Hour Session',
@@ -123,6 +130,17 @@ export default function InstructorHomePage({ token, userProfile }) {
                                                 <Divider className='mb-2' />
 
                                                 <Group position="right">
+                                                    <Button
+                                                        variant="gradient"
+                                                        gradient={{ from: 'indigo', to: 'cyan' }}
+                                                        onClick={() => setShareSessionDialogProps({
+                                                            open: true,
+                                                            sessionId: session.id,
+                                                        })}
+                                                    >
+                                                        Share
+                                                    </Button>
+
                                                     <Button
                                                         variant="gradient"
                                                         gradient={{ from: 'indigo', to: 'cyan' }}
@@ -183,6 +201,8 @@ export default function InstructorHomePage({ token, userProfile }) {
                     }
                 </Container>
             </Center>
+
+            <ShareSessionDialog sessionId={shareSessionDialogProps.sessionId} dialogOpen={shareSessionDialogProps.open} closeDialog={() => setShareSessionDialogProps({ open: false, sessionId: null })} />
         </>
     );
 }

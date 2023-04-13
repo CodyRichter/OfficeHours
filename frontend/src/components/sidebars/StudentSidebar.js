@@ -1,10 +1,17 @@
 import { Button, Center, Navbar, Paper, Text, Title } from "@mantine/core";
 import { isEmpty } from "lodash";
 import React from "react";
-
+import { TbHandMiddleFinger, TbHandOff, TbHandStop } from "react-icons/tb";
 
 export default function StudentSidebar({ token, userProfile }) {
 
+    const [requestingHelp, setRequestingHelp] = React.useState(false);
+
+    React.useEffect(() => {
+        if (requestingHelp) {
+            console.log('Requesting Help');
+        }
+    }, [requestingHelp])
 
     return (
         <Navbar width={{ base: '15vw' }} height='100vh' p="xs">
@@ -44,6 +51,31 @@ export default function StudentSidebar({ token, userProfile }) {
                         </Title>
                     </Center>
                 </Paper>
+            </Navbar.Section>
+
+            <Navbar.Section>
+                {requestingHelp ?
+                    <Button
+                        fullWidth
+                        variant="gradient"
+                        gradient={{ from: 'red', to: 'darkred' }}
+                        onClick={() => setRequestingHelp(false)}
+                        leftIcon={<TbHandOff />}
+                    >
+                        Stop Requesting Help
+                    </Button>
+                    :
+                    <Button
+                        fullWidth
+                        variant="gradient"
+                        gradient={{ from: 'indigo', to: 'cyan' }}
+                        onClick={() => setRequestingHelp(true)}
+                        leftIcon={<TbHandStop />}
+                    // leftIcon={<TbHandMiddleFinger />}
+                    >
+                        Request Instructor Help
+                    </Button>
+                }
             </Navbar.Section>
         </Navbar >
     );

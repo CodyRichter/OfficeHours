@@ -247,7 +247,7 @@ export function SignupDialog({ token }) {
         )}
 
         <Group position="right" className="mt-3">
-          <Button onClick={closeModal} variant="gradient" gradient={{ from: 'orange', to: 'red' }}>
+          <Button onClick={closeModal} variant="outline" color="orange">
             Cancel
           </Button>
           <Button onClick={triggerSignup} variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }}>
