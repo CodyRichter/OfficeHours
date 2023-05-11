@@ -1,0 +1,49 @@
+version: "3.8"
+services:
+  accoh-backend:
+    stdin_open: true
+    restart: always
+    container_name: accoh-backend
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      - GUNICORN_CMD_ARGS=--reload
+      - AWS_ACCESS_KEY=${AWS_KEY}
+      - AWS_SECRET_KEY=${AWS_SECRET}
+      - REDIS_HOST=accoh-redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+      # - DATABASE_URL=${POSTGRES_URL}
+    depends_on:
+      - accoh-database
+      - accoh-redis
+    volumes:
+      - "./src:/app/src"
+    ports:
+      - "4250:4250"
+  accoh-database:
+    image: postgres
+    restart: always
+    container_name: accoh-database
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - '5432:5432'
+    volumes:
+      - accoh-db-data:/var/lib/postgresql/data
+  accoh-redis:
+    image: redis:6.2-alpine
+    restart: always
+    container_name: accoh-redis
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    volumes:
+      - accoh-redis:/data
+volumes:
+  accoh-db-data:
+    driver: local
+  accoh-redis:
+    driver: local
