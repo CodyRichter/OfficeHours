@@ -50,7 +50,7 @@ export default function WebsiteHeader({
                         </Group>
                     ) : (
                         <Button
-                            onClick={() => updateAndSaveToken(null)}
+                            onClick={() => { updateAndSaveToken(null); navigate("/"); }}
                             variant="gradient" gradient={{ from: 'orange', to: 'red' }}
                             leftIcon={<FiLogOut />}
                         >

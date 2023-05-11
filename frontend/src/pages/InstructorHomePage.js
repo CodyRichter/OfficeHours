@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { FiCheckCircle } from "react-icons/fi";
 import StartSessionDialog from "../components/dialogs/StartSessionDialog";
 import ShareSessionDialog from "../components/dialogs/ShareSessionDialog";
+import SessionSummaryDialog from "../components/dialogs/SessionSummaryDialog";
 
 
 export default function InstructorHomePage({ token, userProfile }) {
@@ -20,7 +21,7 @@ export default function InstructorHomePage({ token, userProfile }) {
             start_time: "2021-04-01T12:00:00.000Z",
             end_time: "2021-04-01T13:00:00.000Z",
             active: true,
-            room_code: "123456",
+            room_code: "ABC123",
         },
         {
             id: 2,
@@ -29,7 +30,7 @@ export default function InstructorHomePage({ token, userProfile }) {
             start_time: "2021-04-01T12:00:00.000Z",
             end_time: "2021-04-01T13:00:00.000Z",
             active: true,
-            room_code: "123456",
+            room_code: "ABC123",
         },
         {
             id: 3,
@@ -38,7 +39,7 @@ export default function InstructorHomePage({ token, userProfile }) {
             start_time: "2021-04-01T12:00:00.000Z",
             end_time: "2021-04-01T13:00:00.000Z",
             active: false,
-            room_code: "123456",
+            room_code: "ABC123",
         },
         {
             id: 4,
@@ -47,7 +48,7 @@ export default function InstructorHomePage({ token, userProfile }) {
             start_time: "2021-04-01T12:00:00.000Z",
             end_time: "2021-04-01T13:00:00.000Z",
             active: false,
-            room_code: "123456",
+            room_code: "ABC123",
         },
         {
             id: 5,
@@ -56,7 +57,7 @@ export default function InstructorHomePage({ token, userProfile }) {
             start_time: "2021-04-01T12:00:00.000Z",
             end_time: "2021-04-01T13:00:00.000Z",
             active: false,
-            room_code: "123456",
+            room_code: "ABC123",
         },
         {
             id: 6,
@@ -65,7 +66,7 @@ export default function InstructorHomePage({ token, userProfile }) {
             start_time: "2021-04-01T12:00:00.000Z",
             end_time: "2021-04-01T13:00:00.000Z",
             active: false,
-            room_code: "123456",
+            room_code: "ABC123",
         }
     ]);
 
@@ -73,6 +74,11 @@ export default function InstructorHomePage({ token, userProfile }) {
     const [inactiveSessions, setInactiveSessions] = useState(4);
 
     const [shareSessionDialogProps, setShareSessionDialogProps] = useState({
+        open: false,
+        sessionId: null,
+    });
+
+    const [sessionSummaryDialogProps, setSessionSummaryDialogProps] = useState({
         open: false,
         sessionId: null,
     });
@@ -192,6 +198,21 @@ export default function InstructorHomePage({ token, userProfile }) {
                                             <Text size="xs" className='mb-2' align='left' c="diminished">
                                                 Finished {session.end_time}
                                             </Text>
+
+                                            <Divider className='mb-2' />
+
+                                            <Group position="right">
+                                                <Button
+                                                    variant="gradient"
+                                                    gradient={{ from: 'indigo', to: 'cyan' }}
+                                                    onClick={() => setSessionSummaryDialogProps({
+                                                        open: true,
+                                                        sessionId: session.id,
+                                                    })}
+                                                >
+                                                    View Summary
+                                                </Button>
+                                            </Group>
                                         </Container>
                                     </Paper>
                                 </Grid.Col>
@@ -203,6 +224,9 @@ export default function InstructorHomePage({ token, userProfile }) {
             </Center>
 
             <ShareSessionDialog sessionId={shareSessionDialogProps.sessionId} dialogOpen={shareSessionDialogProps.open} closeDialog={() => setShareSessionDialogProps({ open: false, sessionId: null })} />
+
+            <SessionSummaryDialog sessionId={sessionSummaryDialogProps.sessionId} dialogOpen={sessionSummaryDialogProps.open} closeDialog={() => setSessionSummaryDialogProps({ open: false, sessionId: null })} />
+
         </>
     );
 }

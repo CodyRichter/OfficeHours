@@ -77,10 +77,11 @@ export default function InstructorSessionSidebar({ token, userProfile }) {
                                 <td>John Doe</td>
                                 <td><Button variant="subtle" color="blue">Visit</Button></td>
                             </tr>
-                            <tr>
+                            <tr style={{ backgroundColor: '#4DABF7' }}>
                                 <td></td>
                                 <td>Jane Doe</td>
-                                <td><Button variant="subtle" color="blue">Visit</Button></td>
+                                <td></td>
+
                             </tr>
                             <tr>
                                 <td></td>

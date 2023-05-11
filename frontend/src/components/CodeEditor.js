@@ -39,8 +39,10 @@ function notifyCopy(copy) {
 
 export default function CodeEditor() {
 
-    const [code, setCode] = useState('');
-    const [currentLanguage, setCurrentLanguage] = React.useState('python');
+    const [code, setCode] = useState(`function foo() {
+    return "bar";
+}`);
+    const [currentLanguage, setCurrentLanguage] = React.useState('javascript');
 
     return (
         <>
